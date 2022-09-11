@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'registerVKVUiS.ui'
+## Form generated from reading UI file 'registerdMoiRl.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.3.1
 ##
@@ -15,8 +15,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QLineEdit, QListWidget, QListWidgetItem,
-    QPushButton, QSizePolicy, QWidget)
+from PySide6.QtWidgets import (QApplication, QCheckBox, QLineEdit, QListWidget,
+    QListWidgetItem, QPushButton, QSizePolicy, QWidget)
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -62,6 +62,9 @@ class Ui_Form(object):
 "	background-color: rgb(255, 234, 87);\n"
 "}\n"
 "")
+        self.Check = QCheckBox(Form)
+        self.Check.setObjectName(u"Check")
+        self.Check.setGeometry(QRect(110, 280, 181, 21))
 
         self.retranslateUi(Form)
 
@@ -77,5 +80,7 @@ class Ui_Form(object):
         self.lineEdit_3.setText("")
         self.lineEdit_3.setPlaceholderText(QCoreApplication.translate("Form", u"Password", None))
         self.b2.setText(QCoreApplication.translate("Form", u"REGISTER", None))
+        self.Check.setText(QCoreApplication.translate("Form", u"Check if you are a student", None))
     # retranslateUi
+
 
