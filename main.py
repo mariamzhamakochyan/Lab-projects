@@ -2,12 +2,13 @@ import sys
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QDialog, QApplication
 from PyQt5.uic import loadUi
-from PyQt5 import Qt5
+
 class Login(QDialog):
     def __init__(self):
         super(Login,self).__init__()
         loadUi("login.ui",self)
-        self.b1.clicked.connect(self.loginfunction)
+        self.b2.clicked.connect(self.loginfunction)
+        self.b3.clicked.connect(self.loginfunction)
         self.b1.clicked.connect(self.gotocreate)
 
 
@@ -26,6 +27,8 @@ class CreateAcc(QDialog):
         super(CreateAcc,self).__init__()
         loadUi("register.ui",self)
         self.stdreg.clicked.connect(self.createaccfunction)
+        self.adreg.clicked.connect(self.createaccfunction)
+
 
 
     def createaccfunction(self):
