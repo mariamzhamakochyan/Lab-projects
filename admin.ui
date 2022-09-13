@@ -13,96 +13,174 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QLineEdit" name="lineEdit_2">
-   <property name="geometry">
-    <rect>
-     <x>90</x>
-     <y>60</y>
-     <width>191</width>
-     <height>31</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_4">
-   <property name="geometry">
-    <rect>
-     <x>90</x>
-     <y>100</y>
-     <width>191</width>
-     <height>31</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_5">
-   <property name="geometry">
-    <rect>
-     <x>90</x>
-     <y>140</y>
-     <width>191</width>
-     <height>31</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton">
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <widget class="QLineEdit" name="lineEdit_id">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>20</y>
-     <width>81</width>
+     <y>50</y>
+     <width>211</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="placeholderText">
+    <string>  Enter student ID</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit_first">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>90</y>
+     <width>211</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="placeholderText">
+    <string>  Enter student First Name</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit_last">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>130</y>
+     <width>211</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="placeholderText">
+    <string>  Enter student Last Name</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_add">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>60</y>
+     <width>101</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(61, 62, 255);</string>
    </property>
    <property name="text">
     <string>ADD</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_5">
+  <widget class="QLineEdit" name="lineEdit_email">
    <property name="geometry">
     <rect>
-     <x>200</x>
-     <y>20</y>
-     <width>91</width>
+     <x>10</x>
+     <y>170</y>
+     <width>211</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="placeholderText">
+    <string>  Enter student Email</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_modify">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>110</y>
+     <width>101</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(61, 62, 255);</string>
    </property>
    <property name="text">
     <string>MODIFY</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_6">
+  <widget class="QPushButton" name="pushButton_delet">
    <property name="geometry">
     <rect>
-     <x>100</x>
-     <y>20</y>
-     <width>91</width>
-     <height>31</height>
+     <x>280</x>
+     <y>160</y>
+     <width>101</width>
+     <height>21</height>
     </rect>
    </property>
-   <property name="text">
-    <string>LIST</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_7">
-   <property name="geometry">
-    <rect>
-     <x>300</x>
-     <y>20</y>
-     <width>91</width>
-     <height>31</height>
-    </rect>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(61, 62, 255);
+</string>
    </property>
    <property name="text">
     <string>DELET</string>
    </property>
   </widget>
-  <widget class="QTextBrowser" name="textBrowser">
+  <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>5</x>
-     <y>191</y>
-     <width>391</width>
-     <height>301</height>
+     <x>120</x>
+     <y>10</y>
+     <width>181</width>
+     <height>31</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>  STUDENTS  INFORMATION</string>
+   </property>
+  </widget>
+  <widget class="QTableWidget" name="tableWidget">
+   <property name="geometry">
+    <rect>
+     <x>15</x>
+     <y>231</y>
+     <width>371</width>
+     <height>261</height>
+    </rect>
+   </property>
+   <column>
+    <property name="text">
+     <string>ID</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>FIRST NAME</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>LAST NAME</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>EMAIL</string>
+    </property>
+   </column>
+  </widget>
+  <widget class="QPushButton" name="pushButton_load">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>200</y>
+     <width>81</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(61, 62, 255);
+</string>
+   </property>
+   <property name="text">
+    <string>LOAD</string>
    </property>
   </widget>
  </widget>
