@@ -17,10 +17,12 @@ class Login(QDialog):
     def studentfunc(self):
         username = self.username.text()
         password = self.password.text()
-
         if username != "":
             if password != "":
-                print("connect bdi enenq heto student i acci het")
+                self.studentPage = StudentAcc()
+                widget.addWidget(self.studentPage)
+                widget.setCurrentIndex(widget.currentIndex()+1)
+                self.studentPage.show()
             else:
                 QMessageBox.about(self, "Warning", "Please Enter Password")
         else:
@@ -55,6 +57,12 @@ class AdminAcc(QDialog):
         loadUi("admin.ui", self)
 
 
+class StudentAcc(QDialog):
+    def __init__(self):
+        super(StudentAcc, self).__init__()
+        loadUi("student.ui", self)
+
+
 class CreateAcc(QDialog):
     def __init__(self):
         super(CreateAcc, self).__init__()
@@ -69,14 +77,13 @@ class CreateAcc(QDialog):
         if self.password.text() == self.confirmpassword.text():
             password = self.password.text()
             confirmpassword = self.confirmpassword.text()
-            print("Successfully created acc with username: ", username, "and password: ", password)
-            login = Login()
-            widget.addWidget(login)
-            widget.setCurrentIndex(widget.currentIndex()+1)
             if username != "":
                 if password != "":
                     if confirmpassword != "":
-                        QMessageBox.about(self, "Warning", "you successfully registered")
+                        self.registerPage = Login()
+                        widget.addWidget(self.registerPage)
+                        widget.setCurrentIndex(widget.currentIndex()+1)
+                        self.registerPage.show()
                     else:
                         QMessageBox.about(self, "Warning", "Please confirm the password")
                 else:
