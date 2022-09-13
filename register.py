@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'registerdMoiRl.ui'
+## Form generated from reading UI file 'register.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.3.1
+## Created by: Qt User Interface Compiler version 6.2.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -15,56 +15,35 @@ from PyQt5.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PyQt5.QtWidgets import (QApplication, QCheckBox, QLineEdit, QListWidget,
-    QListWidgetItem, QPushButton, QSizePolicy, QWidget)
+from PyQt5.QtWidgets import (QApplication, QLineEdit, QPushButton, QSizePolicy,
+    QWidget)
 
 class Ui_Form(object):
     def setupUi(self, Form):
         if not Form.objectName():
             Form.setObjectName(u"Form")
-        Form.resize(380, 401)
-        self.listWidget = QListWidget(Form)
-        self.listWidget.setObjectName(u"listWidget")
-        self.listWidget.setGeometry(QRect(0, -10, 381, 411))
-        self.listWidget.setStyleSheet(u"background-color:rgba(47, 49, 52,200);\n"
-"border-radious:20px;\n"
-"")
-        self.lineEdit = QLineEdit(Form)
-        self.lineEdit.setObjectName(u"lineEdit")
-        self.lineEdit.setGeometry(QRect(90, 130, 211, 31))
-        self.lineEdit.setStyleSheet(u"border-radius:2px;\n"
-"padding-left:10px;\n"
-"border:px\n"
-"")
-        self.lineEdit_2 = QLineEdit(Form)
-        self.lineEdit_2.setObjectName(u"lineEdit_2")
-        self.lineEdit_2.setGeometry(QRect(90, 230, 211, 31))
-        self.lineEdit_2.setStyleSheet(u"border-radius:2px;\n"
-"padding-left:10px;\n"
-"border:px\n"
-"")
-        self.lineEdit_3 = QLineEdit(Form)
-        self.lineEdit_3.setObjectName(u"lineEdit_3")
-        self.lineEdit_3.setGeometry(QRect(90, 180, 211, 31))
-        self.lineEdit_3.setStyleSheet(u"border-radius:2px;\n"
-"padding-left:10px;\n"
-"border:px\n"
-"")
-        self.b2 = QPushButton(Form)
-        self.b2.setObjectName(u"b2")
-        self.b2.setGeometry(QRect(90, 330, 211, 31))
-        self.b2.setStyleSheet(u"QPushButton#b2{\n"
-"background-color: rgb(255, 191, 16);	\n"
-"color:rgb(1,12,0);\n"
-"colorborder-radius:5px;\n"
-"}\n"
-"QPushButton#b2:pressed{\n"
-"	background-color: rgb(255, 234, 87);\n"
-"}\n"
-"")
-        self.Check = QCheckBox(Form)
-        self.Check.setObjectName(u"Check")
-        self.Check.setGeometry(QRect(110, 280, 181, 21))
+        Form.resize(400, 500)
+        self.stdreg = QPushButton(Form)
+        self.stdreg.setObjectName(u"stdreg")
+        self.stdreg.setGeometry(QRect(20, 310, 171, 31))
+        self.stdreg.setStyleSheet(u"\n"
+"background-color: rgb(1, 47, 82);")
+        self.adreg = QPushButton(Form)
+        self.adreg.setObjectName(u"adreg")
+        self.adreg.setGeometry(QRect(210, 310, 171, 31))
+        self.adreg.setStyleSheet(u"\n"
+"background-color: rgb(1, 47, 82);")
+        self.username = QLineEdit(Form)
+        self.username.setObjectName(u"username")
+        self.username.setGeometry(QRect(20, 120, 361, 41))
+        self.password = QLineEdit(Form)
+        self.password.setObjectName(u"password")
+        self.password.setGeometry(QRect(20, 180, 361, 41))
+        self.password.setEchoMode(QLineEdit.Password)
+        self.confirmpassword = QLineEdit(Form)
+        self.confirmpassword.setObjectName(u"confirmpassword")
+        self.confirmpassword.setGeometry(QRect(20, 240, 361, 41))
+        self.confirmpassword.setEchoMode(QLineEdit.Password)
 
         self.retranslateUi(Form)
 
@@ -73,14 +52,13 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
-        self.lineEdit.setText("")
-        self.lineEdit.setPlaceholderText(QCoreApplication.translate("Form", u"Username", None))
-        self.lineEdit_2.setText("")
-        self.lineEdit_2.setPlaceholderText(QCoreApplication.translate("Form", u"Email address", None))
-        self.lineEdit_3.setText("")
-        self.lineEdit_3.setPlaceholderText(QCoreApplication.translate("Form", u"Password", None))
-        self.b2.setText(QCoreApplication.translate("Form", u"REGISTER", None))
-        self.Check.setText(QCoreApplication.translate("Form", u"Check if you are a student", None))
+        self.stdreg.setText(QCoreApplication.translate("Form", u"Registrate as student", None))
+        self.adreg.setText(QCoreApplication.translate("Form", u"Registrate as admin", None))
+        self.username.setText("")
+        self.username.setPlaceholderText(QCoreApplication.translate("Form", u"  Enter the username", None))
+        self.password.setText("")
+        self.password.setPlaceholderText(QCoreApplication.translate("Form", u"  Enter the password", None))
+        self.confirmpassword.setText("")
+        self.confirmpassword.setPlaceholderText(QCoreApplication.translate("Form", u"  Confirm the password", None))
     # retranslateUi
-
 

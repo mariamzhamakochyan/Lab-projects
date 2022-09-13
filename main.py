@@ -36,9 +36,17 @@ class Login(QDialog):
     def adminfunc(self):
         username = self.username.text()
         password = self.password.text()
-        info = AdminAcc()
-        widget.addWidget(info)
-        widget.setCurrentIndex(widget.currentIndex()+1)
+        if username != "":
+            if password != "":
+                self.adminPage = AdminAcc()
+                widget.addWidget(self.adminPage)
+                widget.setCurrentIndex(widget.currentIndex()+1)
+                self.adminPage.show()
+            else:
+                QMessageBox.about(self, "Warning", "Please Enter Password")
+        else:
+            QMessageBox.about(self, "Warning", "Please Enter username")
+
 
 
 class AdminAcc(QDialog):
