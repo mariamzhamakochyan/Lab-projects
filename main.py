@@ -20,7 +20,7 @@ class Login(QDialog):
         if len(username) == 0 or len(password) == 0:
             QMessageBox.about(self, "Warning", "Please Enter username and password")
         else:
-            conn = sqlite3.connect("shop_data.db")
+            conn = sqlite3.connect("database/shop_data.db")
             cursor = conn.cursor()
             cursor.execute('SELECT password FROM login_info WHERE username =\''+username+"\'")
             row = cursor.fetchall()
@@ -44,7 +44,7 @@ class Login(QDialog):
         if len(username) == 0 or len(password) == 0:
             QMessageBox.about(self, "Warning", "Please Enter username and password")
         else:
-            conn = sqlite3.connect("shop_data1.db")
+            conn = sqlite3.connect("database/shop_data1.db")
             cursor = conn.cursor()
             cursor.execute('SELECT password FROM login_info1 WHERE username =\''+username+"\'")
             row = cursor.fetchall()
@@ -68,7 +68,7 @@ class AdminAcc(QDialog):
 
 
     def listfunc(self):
-        connection = sqlite3.connect("std_data.db")
+        connection = sqlite3.connect("database/std_data.db")
         query = "SELECT * FROM student_data"
         connection.execute(query)
         result = connection.execute(query)
@@ -84,7 +84,7 @@ class AdminAcc(QDialog):
         name = self.lineEdit_first.text()
         surname = self.lineEdit_last.text()
         email = self.lineEdit_email.text()
-        conn = sqlite3.connect("std_data.db")
+        conn = sqlite3.connect("database/std_data.db")
         cur = conn.cursor()
         student_info = [id, name, surname, email]
         cur.execute('INSERT INTO student_data (id, name, surname, email) VALUES (?,?,?,?)', student_info)
@@ -96,7 +96,7 @@ class AdminAcc(QDialog):
         name = self.lineEdit_first.text()
         surname = self.lineEdit_last.text()
         email = self.lineEdit_email.text()
-        conn = sqlite3.connect("std_data.db")
+        conn = sqlite3.connect("database/std_data.db")
         cur = conn.cursor()
         deleteq = "DELETE FROM student_data WHERE email = %s"
         values = (email,)
@@ -112,7 +112,7 @@ class AdminAcc(QDialog):
         name = self.lineEdit_first.text()
         surname = self.lineEdit_last.text()
         email = self.lineEdit_email.text()
-        conn = sqlite3.connect("std_data.db")
+        conn = sqlite3.connect("database/std_data.db")
         cur = conn.cursor()
         student_info = [id, name, surname, email]
         updateq = "UPDATE student_data SET (id, name, surname, email) VALUES (?,?,?,?)', student_info"
@@ -139,7 +139,7 @@ class StudentAcc(QDialog):
         name = self.lineEdit_task.text()
         instruction = self.lineEdit_instruction.text()
         description = self.lineEdit_description.text()
-        conn = sqlite3.connect("task_data.db")
+        conn = sqlite3.connect("database/task_data.db")
         cur = conn.cursor()
         task_info = [name, description, instruction]
         cur.execute('INSERT INTO task_data (name, description, instruction) VALUES (?,?,?)', task_info)
@@ -147,7 +147,7 @@ class StudentAcc(QDialog):
         conn.close()
 
     def load_add(self):
-        connection = sqlite3.connect("task_data.db")
+        connection = sqlite3.connect("database/task_data.db")
         query = "SELECT * FROM task_data"
         connection.execute(query)
         result = connection.execute(query)
@@ -163,7 +163,7 @@ class StudentAcc(QDialog):
         name = self.lineEdit_task.text()
         instruction = self.lineEdit_instruction.text()
         description = self.lineEdit_description.text()
-        conn = sqlite3.connect("doneTasks.db")
+        conn = sqlite3.connect("database/doneTasks.db")
         cur = conn.cursor()
         task_info = [name, description, instruction]
         cur.execute('INSERT INTO doneTask (name, description, instruction) VALUES (?,?,?)', task_info)
@@ -171,7 +171,7 @@ class StudentAcc(QDialog):
         conn.close()
 
     def load_done(self):
-        connection = sqlite3.connect("doneTasks.db")
+        connection = sqlite3.connect("database/doneTasks.db")
         query = "SELECT * FROM doneTask"
         connection.execute(query)
         result = connection.execute(query)
@@ -199,7 +199,7 @@ class CreateAcc(QDialog):
             elif password != confirmpassword:
                 QMessageBox.about(self, "Warning", "Passwords do not match")
             else:
-                conn = sqlite3.connect("shop_data.db")
+                conn = sqlite3.connect("database /shop_data.db")
                 cur = conn.cursor()
                 user_info = [username, password]
                 cur.execute('INSERT INTO login_info (username, password) VALUES (?,?)', user_info)
@@ -221,7 +221,7 @@ class CreateAcc(QDialog):
             elif password != confirmpassword:
                 QMessageBox.about(self, "Warning", "Passwords do not match")
             else:
-                conn = sqlite3.connect("shop_data1.db")
+                conn = sqlite3.connect("database/shop_data1.db")
                 cur = conn.cursor()
                 user_info = [username, password]
                 cur.execute('INSERT INTO login_info1 (username, password) VALUES (?,?)', user_info)
