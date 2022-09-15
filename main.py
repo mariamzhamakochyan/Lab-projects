@@ -56,6 +56,23 @@ class AdminAcc(QDialog):
     def __init__(self):
         super(AdminAcc, self).__init__()
         loadUi("admin.ui", self)
+        self.pushButton_add.clicked.connect(self.addfunc)
+
+
+    def addfunc(self):
+        id = self.lineEdit_id.text()
+        name = self.lineEdit_first.text()
+        surname = self.lineEdit_last.text()
+        email = self.lineEdit_email.text()
+
+        conn = sqlite3.connect("std_data.db")
+        cur = conn.cursor()
+        student_info = [id, name, surname, email]
+        cur.execute('INSERT INTO student_data (id, name, surname, email) VALUES (?,?,?,?)', student_info)
+        conn.commit()
+        conn.close()
+
+
 
 
 
