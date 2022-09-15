@@ -65,6 +65,31 @@ class AdminAcc(QDialog):
         self.pushButton_list.clicked.connect(self.listfunc)
         self.pushButton_modify.clicked.connect(self.modifyfunc)
         self.pushButton_delet.clicked.connect(self.delfunc)
+        self.tableWidget.cellDoubleClicked.connect(self.selectedCell)
+
+    def selectedCell(self):
+        id = self.lineEdit_id.text()
+        name = self.lineEdit_first.text()
+        surname = self.lineEdit_last.text()
+        email = self.lineEdit_email.text()
+        conn = sqlite3.connect("database/std_data.db")
+        cur = conn.cursor()
+        self.index = self.tableWidget.selectedItems()
+
+        query = "SELECT  id, name, surname, email FROM account WHERE id = %s"
+        value = (self.index[0].text(),)
+
+        try:
+            cur.execute(query, value)
+            row = cur.fetchone()
+
+            if row:
+                self.lineEdit_id.setText(row[0])
+                self.lineEdit_first.setText(row[1])
+                self.lineEdit_last.setText(row[2])
+                self.lineEdit_email.setText(row[3])
+        except:
+            print("Fill Failed")
 
 
     def listfunc(self):
@@ -199,7 +224,7 @@ class CreateAcc(QDialog):
             elif password != confirmpassword:
                 QMessageBox.about(self, "Warning", "Passwords do not match")
             else:
-                conn = sqlite3.connect("database /shop_data.db")
+                conn = sqlite3.connect("database/shop_data.db")
                 cur = conn.cursor()
                 user_info = [username, password]
                 cur.execute('INSERT INTO login_info (username, password) VALUES (?,?)', user_info)
