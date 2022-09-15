@@ -61,7 +61,7 @@ background-color: rgb(1, 47, 82);</string>
 background-color: rgb(1, 47, 82);</string>
    </property>
    <property name="text">
-    <string>Student Login</string>
+    <string>Srudent Login</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="password">

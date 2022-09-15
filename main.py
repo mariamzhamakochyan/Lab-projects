@@ -1,8 +1,8 @@
 import sys
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QDialog, QApplication, QMessageBox
+from PyQt5.QtWidgets import QDialog, QApplication, QMessageBox, QPushButton
 from PyQt5.uic import loadUi
-
+import sqlite3
 
 
 class Login(QDialog):
@@ -13,27 +13,29 @@ class Login(QDialog):
         self.b3.clicked.connect(self.adminfunc)
         self.b1.clicked.connect(self.gotocreate)
 
-
     def studentfunc(self):
         username = self.username.text()
         password = self.password.text()
-        if username != "":
-            if password != "":
+
+        if len(username)==0 or len(password)==0:
+            QMessageBox.about(self, "Warning", "Please Enter username and password")
+        else:
+            conn = sqlite3.connect("shop_data.db")
+            cursor = conn.cursor()
+            cursor.execute('SELECT password FROM login_info WHERE username =\''+username+"\'")
+            row = cursor.fetchall()
+            if row:
                 self.studentPage = StudentAcc()
                 widget.addWidget(self.studentPage)
-                widget.setCurrentIndex(widget.currentIndex()+1)
+                widget.setCurrentIndex(widget.currentIndex() + 1)
                 self.studentPage.show()
             else:
-                QMessageBox.about(self, "Warning", "Please Enter Password")
-        else:
-            QMessageBox.about(self, "Warning", "Please Enter username")
+                QMessageBox.about(self, "Warning", "Wrong username or password")
 
     def gotocreate(self):
         createacc = CreateAcc()
         widget.addWidget(createacc)
-        widget.setCurrentIndex(widget.currentIndex()+1)
-
-
+        widget.setCurrentIndex(widget.currentIndex() + 1)
 
     def adminfunc(self):
         username = self.username.text()
@@ -42,7 +44,7 @@ class Login(QDialog):
             if password != "":
                 self.adminPage = AdminAcc()
                 widget.addWidget(self.adminPage)
-                widget.setCurrentIndex(widget.currentIndex()+1)
+                widget.setCurrentIndex(widget.currentIndex() + 1)
                 self.adminPage.show()
             else:
                 QMessageBox.about(self, "Warning", "Please Enter Password")
@@ -50,11 +52,11 @@ class Login(QDialog):
             QMessageBox.about(self, "Warning", "Please Enter username")
 
 
-
 class AdminAcc(QDialog):
     def __init__(self):
         super(AdminAcc, self).__init__()
         loadUi("admin.ui", self)
+
 
 
 class StudentAcc(QDialog):
@@ -70,26 +72,29 @@ class CreateAcc(QDialog):
         self.stdreg.clicked.connect(self.createaccfunction)
         self.adreg.clicked.connect(self.createaccfunction)
 
-
-
     def createaccfunction(self):
         username = self.username.text()
         if self.password.text() == self.confirmpassword.text():
             password = self.password.text()
             confirmpassword = self.confirmpassword.text()
-            if username != "":
-                if password != "":
-                    if confirmpassword != "":
-                        self.registerPage = Login()
-                        widget.addWidget(self.registerPage)
-                        widget.setCurrentIndex(widget.currentIndex()+1)
-                        self.registerPage.show()
-                    else:
-                        QMessageBox.about(self, "Warning", "Please confirm the password")
-                else:
-                    QMessageBox.about(self, "Warning", "Please Enter your Password")
+
+            if len(username) == 0 or len(password) == 0 or len(confirmpassword) == 0:
+                QMessageBox.about(self, "Warning", "Please fill in all inputs.")
+
+            elif password != confirmpassword:
+                QMessageBox.about(self, "Warning", "Passwords do not match")
             else:
-                QMessageBox.about(self, "Warning", "Please Enter your Username")
+                conn = sqlite3.connect("shop_data.db")
+                cur = conn.cursor()
+                user_info = [username, password]
+                cur.execute('INSERT INTO login_info (username, password) VALUES (?,?)', user_info)
+                conn.commit()
+                conn.close()
+                self.registerPage = Login()
+                widget.addWidget(self.registerPage)
+                widget.setCurrentIndex(widget.currentIndex() + 1)
+                self.registerPage.show()
+
 
 
 app = QApplication(sys.argv)
