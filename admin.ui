@@ -166,7 +166,7 @@
     </property>
    </column>
   </widget>
-  <widget class="QPushButton" name="pushButton_exit">
+  <widget class="QPushButton" name="pushButton_list">
    <property name="geometry">
     <rect>
      <x>280</x>
@@ -179,7 +179,7 @@
     <string notr="true">background-color: rgb(61, 62, 255);</string>
    </property>
    <property name="text">
-    <string>EXIT</string>
+    <string>LIST</string>
    </property>
   </widget>
  </widget>
