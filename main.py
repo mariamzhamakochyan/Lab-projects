@@ -1,6 +1,6 @@
 import sys
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QDialog, QApplication, QMessageBox, QPushButton
+from PyQt5.QtWidgets import QDialog, QApplication, QMessageBox
 from PyQt5.uic import loadUi
 import sqlite3
 
@@ -17,7 +17,7 @@ class Login(QDialog):
         username = self.username.text()
         password = self.password.text()
 
-        if len(username)==0 or len(password)==0:
+        if len(username) == 0 or len(password) == 0:
             QMessageBox.about(self, "Warning", "Please Enter username and password")
         else:
             conn = sqlite3.connect("shop_data.db")
@@ -41,7 +41,7 @@ class Login(QDialog):
         username = self.username.text()
         password = self.password.text()
 
-        if len(username)==0 or len(password)==0:
+        if len(username) == 0 or len(password) == 0:
             QMessageBox.about(self, "Warning", "Please Enter username and password")
         else:
             conn = sqlite3.connect("shop_data1.db")
@@ -129,7 +129,58 @@ class StudentAcc(QDialog):
     def __init__(self):
         super(StudentAcc, self).__init__()
         loadUi("student.ui", self)
+        self.pushButton_add.clicked.connect(self.add)
+        self.pushButton_done.clicked.connect(self.done)
+        self.pushButton_load_add.clicked.connect(self.load_add)
+        self.pushButton_load_done.clicked.connect(self.load_done)
 
+
+    def add(self):
+        name = self.lineEdit_task.text()
+        instruction = self.lineEdit_instruction.text()
+        description = self.lineEdit_description.text()
+        conn = sqlite3.connect("task_data.db")
+        cur = conn.cursor()
+        task_info = [name, description, instruction]
+        cur.execute('INSERT INTO task_data (name, description, instruction) VALUES (?,?,?)', task_info)
+        conn.commit()
+        conn.close()
+
+    def load_add(self):
+        connection = sqlite3.connect("task_data.db")
+        query = "SELECT * FROM task_data"
+        connection.execute(query)
+        result = connection.execute(query)
+        self.tableWidget_all.setRowCount(0)
+        for row_number, row_data in enumerate(result):
+            self.tableWidget_all.insertRow(row_number)
+            for column_number, data in enumerate(row_data):
+                self.tableWidget_all.setItem(row_number, column_number, QtWidgets.QTableWidgetItem(str(data)))
+        connection.close()
+
+
+    def done(self):
+        name = self.lineEdit_task.text()
+        instruction = self.lineEdit_instruction.text()
+        description = self.lineEdit_description.text()
+        conn = sqlite3.connect("doneTasks.db")
+        cur = conn.cursor()
+        task_info = [name, description, instruction]
+        cur.execute('INSERT INTO doneTask (name, description, instruction) VALUES (?,?,?)', task_info)
+        conn.commit()
+        conn.close()
+
+    def load_done(self):
+        connection = sqlite3.connect("doneTasks.db")
+        query = "SELECT * FROM doneTask"
+        connection.execute(query)
+        result = connection.execute(query)
+        self.tableWidget_done.setRowCount(0)
+        for row_number, row_data in enumerate(result):
+            self.tableWidget_done.insertRow(row_number)
+            for column_number, data in enumerate(row_data):
+                self.tableWidget_done.setItem(row_number, column_number, QtWidgets.QTableWidgetItem(str(data)))
+        connection.close()
 
 class CreateAcc(QDialog):
     def __init__(self):
@@ -145,7 +196,6 @@ class CreateAcc(QDialog):
             confirmpassword = self.confirmpassword.text()
             if len(username) == 0 or len(password) == 0 or len(confirmpassword) == 0:
                 QMessageBox.about(self, "Warning", "Please fill in all inputs.")
-
             elif password != confirmpassword:
                 QMessageBox.about(self, "Warning", "Passwords do not match")
             else:
