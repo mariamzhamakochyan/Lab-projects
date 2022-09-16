@@ -6,72 +6,103 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>500</height>
+    <width>700</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QPushButton" name="b1">
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color:qlineargradient(spread:pad, x1:0.409, y1:0.420455, x2:1, y2:1, stop:0 rgba(143, 0, 255, 255), stop:1 rgba(255, 255, 255, 255))</string>
+  </property>
+  <widget class="QPushButton" name="pushButtton_register">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>430</y>
+     <x>190</x>
+     <y>500</y>
      <width>321</width>
      <height>41</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">
-background-color: rgb(1, 47, 82);</string>
+    <string notr="true">background-color: rgb(61, 41, 128);</string>
    </property>
    <property name="text">
     <string>R E G I S T E R</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="b3">
+  <widget class="QPushButton" name="pushButton_adminlogin">
    <property name="geometry">
     <rect>
-     <x>210</x>
-     <y>320</y>
+     <x>360</x>
+     <y>350</y>
      <width>171</width>
      <height>31</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">
-background-color: rgb(1, 47, 82);</string>
+    <string notr="true">background-color: rgb(61, 41, 128);</string>
    </property>
    <property name="text">
     <string>Admin Login</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="b2">
+  <widget class="QPushButton" name="pushButton_stdlogin">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>320</y>
+     <x>170</x>
+     <y>350</y>
      <width>171</width>
      <height>31</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">
-background-color: rgb(1, 47, 82);</string>
+    <string notr="true">background-color: rgb(61, 41, 128);</string>
    </property>
    <property name="text">
-    <string>Srudent Login</string>
+    <string>Student Login</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="username">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>210</y>
+     <width>361</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::LeftToRight</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(38, 38, 38);</string>
+   </property>
+   <property name="echoMode">
+    <enum>QLineEdit::Normal</enum>
+   </property>
+   <property name="placeholderText">
+    <string>  Enter the username</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="password">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>250</y>
+     <x>170</x>
+     <y>270</y>
      <width>361</width>
      <height>41</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(38, 38, 38);</string>
+   </property>
+   <property name="text">
+    <string/>
    </property>
    <property name="echoMode">
     <enum>QLineEdit::Password</enum>
@@ -80,20 +111,20 @@ background-color: rgb(1, 47, 82);</string>
     <string>  Enter the password</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="username">
+  <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>190</y>
-     <width>361</width>
-     <height>41</height>
+     <x>250</x>
+     <y>70</y>
+     <width>201</width>
+     <height>61</height>
     </rect>
    </property>
-   <property name="text">
-    <string/>
+   <property name="styleSheet">
+    <string notr="true">font: 64pt &quot;.AppleSystemUIFont&quot;;</string>
    </property>
-   <property name="placeholderText">
-    <string>  Enter the username</string>
+   <property name="text">
+    <string>LOG IN</string>
    </property>
   </widget>
  </widget>

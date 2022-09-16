@@ -6,18 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>500</height>
+    <width>700</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color:qlineargradient(spread:pad, x1:0.409, y1:0.420455, x2:1, y2:1, stop:0 rgba(143, 0, 255, 255), stop:1 rgba(255, 255, 255, 255))</string>
+  </property>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>150</x>
-     <y>20</y>
+     <x>300</x>
+     <y>10</y>
      <width>101</width>
      <height>21</height>
     </rect>
@@ -29,8 +32,8 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>60</y>
+     <x>230</x>
+     <y>40</y>
      <width>261</width>
      <height>31</height>
     </rect>
@@ -45,11 +48,14 @@
   <widget class="QPushButton" name="pushButton_add">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>240</y>
-     <width>91</width>
+     <x>380</x>
+     <y>290</y>
+     <width>101</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(61, 41, 128);</string>
    </property>
    <property name="text">
     <string> ADD  TASKS</string>
@@ -58,11 +64,14 @@
   <widget class="QLineEdit" name="lineEdit_task">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>380</x>
      <y>120</y>
-     <width>171</width>
-     <height>31</height>
+     <width>311</width>
+     <height>41</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(38, 38, 38);</string>
    </property>
    <property name="placeholderText">
     <string>  Task name</string>
@@ -71,11 +80,14 @@
   <widget class="QLineEdit" name="lineEdit_description">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>160</y>
-     <width>171</width>
-     <height>31</height>
+     <x>380</x>
+     <y>180</y>
+     <width>311</width>
+     <height>41</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(38, 38, 38);</string>
    </property>
    <property name="placeholderText">
     <string>  Description</string>
@@ -84,11 +96,14 @@
   <widget class="QLineEdit" name="lineEdit_instruction">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>200</y>
-     <width>171</width>
-     <height>31</height>
+     <x>380</x>
+     <y>240</y>
+     <width>311</width>
+     <height>41</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(38, 38, 38);</string>
    </property>
    <property name="placeholderText">
     <string>  Instruction</string>
@@ -97,12 +112,30 @@
   <widget class="QTableWidget" name="tableWidget_all">
    <property name="geometry">
     <rect>
-     <x>190</x>
-     <y>120</y>
-     <width>201</width>
-     <height>151</height>
+     <x>10</x>
+     <y>90</y>
+     <width>351</width>
+     <height>231</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(38, 38, 38);</string>
+   </property>
+   <attribute name="horizontalHeaderCascadingSectionResizes">
+    <bool>false</bool>
+   </attribute>
+   <attribute name="horizontalHeaderHighlightSections">
+    <bool>false</bool>
+   </attribute>
+   <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+    <bool>false</bool>
+   </attribute>
+   <attribute name="horizontalHeaderStretchLastSection">
+    <bool>true</bool>
+   </attribute>
+   <attribute name="verticalHeaderCascadingSectionResizes">
+    <bool>false</bool>
+   </attribute>
    <column>
     <property name="text">
      <string>Name</string>
@@ -122,25 +155,55 @@
   <widget class="QPushButton" name="pushButton_done">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>270</y>
+     <x>510</x>
+     <y>290</y>
      <width>101</width>
      <height>31</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(61, 41, 128);</string>
+   </property>
    <property name="text">
-    <string>DONE  TASKS</string>
+    <string>DONE </string>
    </property>
   </widget>
   <widget class="QTableWidget" name="tableWidget_done">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>330</y>
-     <width>301</width>
-     <height>151</height>
+     <x>10</x>
+     <y>380</y>
+     <width>571</width>
+     <height>211</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(38, 38, 38);</string>
+   </property>
+   <attribute name="horizontalHeaderMinimumSectionSize">
+    <number>19</number>
+   </attribute>
+   <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+    <bool>false</bool>
+   </attribute>
+   <attribute name="horizontalHeaderStretchLastSection">
+    <bool>true</bool>
+   </attribute>
+   <attribute name="verticalHeaderCascadingSectionResizes">
+    <bool>true</bool>
+   </attribute>
+   <attribute name="verticalHeaderMinimumSectionSize">
+    <number>21</number>
+   </attribute>
+   <attribute name="verticalHeaderHighlightSections">
+    <bool>false</bool>
+   </attribute>
+   <attribute name="verticalHeaderShowSortIndicator" stdset="0">
+    <bool>true</bool>
+   </attribute>
+   <attribute name="verticalHeaderStretchLastSection">
+    <bool>false</bool>
+   </attribute>
    <column>
     <property name="text">
      <string>Name</string>
@@ -160,8 +223,8 @@
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>140</x>
-     <y>300</y>
+     <x>270</x>
+     <y>350</y>
      <width>101</width>
      <height>20</height>
     </rect>
@@ -173,11 +236,14 @@
   <widget class="QPushButton" name="pushButton_load_done">
    <property name="geometry">
     <rect>
-     <x>120</x>
-     <y>270</y>
-     <width>61</width>
+     <x>610</x>
+     <y>550</y>
+     <width>71</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(61, 41, 128);</string>
    </property>
    <property name="text">
     <string>LOAD</string>
@@ -186,14 +252,30 @@
   <widget class="QPushButton" name="pushButton_load_add">
    <property name="geometry">
     <rect>
-     <x>110</x>
-     <y>240</y>
+     <x>20</x>
+     <y>330</y>
      <width>71</width>
      <height>31</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(61, 41, 128);</string>
+   </property>
    <property name="text">
     <string>LOAD</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>60</y>
+     <width>41</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TASKS</string>
    </property>
   </widget>
  </widget>

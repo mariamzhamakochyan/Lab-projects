@@ -5,13 +5,20 @@ from PyQt5.uic import loadUi
 import sqlite3
 
 
+def gotocreate():
+    createacc = CreateAcc()
+    widget.addWidget(createacc)
+    widget.setCurrentIndex(widget.currentIndex() + 1)
+
+
 class Login(QDialog):
     def __init__(self):
         super(Login, self).__init__()
+        self.studentPage = StudentAcc()
         loadUi("login.ui", self)
-        self.b2.clicked.connect(self.studentfunc)
-        self.b3.clicked.connect(self.adminfunc)
-        self.b1.clicked.connect(self.gotocreate)
+        self.pushButton_stdlogin.clicked.connect(self.studentfunc)
+        self.pushButton_adminlogin.clicked.connect(self.adminfunc)
+        self.pushButtton_register.clicked.connect(gotocreate)
 
     def studentfunc(self):
         username = self.username.text()
@@ -22,20 +29,14 @@ class Login(QDialog):
         else:
             conn = sqlite3.connect("database/shop_data.db")
             cursor = conn.cursor()
-            cursor.execute('SELECT password FROM login_info WHERE username =\''+username+"\'")
+            cursor.execute('SELECT password FROM login_info WHERE username =\'' + username + "\'")
             row = cursor.fetchall()
             if row:
-                self.studentPage = StudentAcc()
                 widget.addWidget(self.studentPage)
                 widget.setCurrentIndex(widget.currentIndex() + 1)
                 self.studentPage.show()
             else:
                 QMessageBox.about(self, "Warning", "Wrong username or password")
-
-    def gotocreate(self):
-        createacc = CreateAcc()
-        widget.addWidget(createacc)
-        widget.setCurrentIndex(widget.currentIndex() + 1)
 
     def adminfunc(self):
         username = self.username.text()
@@ -46,7 +47,7 @@ class Login(QDialog):
         else:
             conn = sqlite3.connect("database/shop_data1.db")
             cursor = conn.cursor()
-            cursor.execute('SELECT password FROM login_info1 WHERE username =\''+username+"\'")
+            cursor.execute('SELECT password FROM login_info1 WHERE username =\'' + username + "\'")
             row = cursor.fetchall()
             if row:
                 self.adminPage = AdminAcc()
@@ -65,31 +66,38 @@ class AdminAcc(QDialog):
         self.pushButton_list.clicked.connect(self.listfunc)
         self.pushButton_modify.clicked.connect(self.modifyfunc)
         self.pushButton_delet.clicked.connect(self.delfunc)
-        self.tableWidget.cellDoubleClicked.connect(self.selectedCell)
+        # self.tableWidget.cellDoubleClicked.connect(self.selectedCell)
 
-    def selectedCell(self):
-        id = self.lineEdit_id.text()
-        name = self.lineEdit_first.text()
-        surname = self.lineEdit_last.text()
-        email = self.lineEdit_email.text()
-        conn = sqlite3.connect("database/std_data.db")
-        cur = conn.cursor()
-        self.index = self.tableWidget.selectedItems()
+        self.tableWidget.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
+        self.tableWidget.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
 
-        query = "SELECT  id, name, surname, email FROM account WHERE id = %s"
-        value = (self.index[0].text(),)
 
-        try:
-            cur.execute(query, value)
-            row = cur.fetchone()
+    # def selectedCell(self):
+    #     conn = sqlite3.connect("database/std_data.db")
+    #     id = self.lineEdit_id.text()
+    #     name = self.lineEdit_first.text()
+    #     surname = self.lineEdit_last.text()
+    #     email = self.lineEdit_email.text()
+    #     cur = conn.cursor()
+    #     self.index = self.tableWidget.selectedItems()
+    #     query = "SELECT id, name, surname, email FROM student_data WHERE id = %s"
+    #     value = (self.index[0].text(),)
+    #
+    #     try:
+    #         cur.execute(query, value)
+    #         row = cur.fetchone()
+    #
+    #         if row:
+    #             self.lineEdit_id.setText(row[0])
+    #             self.lineEdit_first.setText(row[1])
+    #             self.lineEdit_last.setText(row[2])
+    #             self.lineEdit_email.setText(row[3])
+    #     except:
+    #         print("Fill Failed")
+    #
 
-            if row:
-                self.lineEdit_id.setText(row[0])
-                self.lineEdit_first.setText(row[1])
-                self.lineEdit_last.setText(row[2])
-                self.lineEdit_email.setText(row[3])
-        except:
-            print("Fill Failed")
+
+
 
 
     def listfunc(self):
@@ -118,36 +126,25 @@ class AdminAcc(QDialog):
 
     def delfunc(self):
         id = self.lineEdit_id.text()
-        name = self.lineEdit_first.text()
-        surname = self.lineEdit_last.text()
-        email = self.lineEdit_email.text()
         conn = sqlite3.connect("database/std_data.db")
         cur = conn.cursor()
-        deleteq = "DELETE FROM student_data WHERE email = %s"
-        values = (email,)
-        try:
-            cur.execute(deleteq, values)
-            conn.commit()
-            print("success")
-        except:
-            print("failed")
+        cur.execute("DELETE from student_data WHERE id = :id",
+                    {'id': id})
+        conn.commit()
+        conn.close()
 
     def modifyfunc(self):
         id = self.lineEdit_id.text()
         name = self.lineEdit_first.text()
         surname = self.lineEdit_last.text()
         email = self.lineEdit_email.text()
-        conn = sqlite3.connect("database/std_data.db")
-        cur = conn.cursor()
-        student_info = [id, name, surname, email]
-        updateq = "UPDATE student_data SET (id, name, surname, email) VALUES (?,?,?,?)', student_info"
-        values = (id, name, surname, email)
-        try:
-            cur.execute(updateq, values)
-            cur.commit()
-            print("Success")
-        except:
-            print("failed")
+        connection = sqlite3.connect('database/std_data.db')
+        cur = connection.cursor()
+        with connection:
+            cur.execute("""UPDATE student_data SET name = :name, surname = :surname, email = :email
+                           WHERE id = :id""",
+                        {'name': name, 'surname': surname, 'id': id,
+                         'email': email})
 
 
 class StudentAcc(QDialog):
@@ -183,7 +180,6 @@ class StudentAcc(QDialog):
                 self.tableWidget_all.setItem(row_number, column_number, QtWidgets.QTableWidgetItem(str(data)))
         connection.close()
 
-
     def done(self):
         name = self.lineEdit_task.text()
         instruction = self.lineEdit_instruction.text()
@@ -207,12 +203,20 @@ class StudentAcc(QDialog):
                 self.tableWidget_done.setItem(row_number, column_number, QtWidgets.QTableWidgetItem(str(data)))
         connection.close()
 
+
 class CreateAcc(QDialog):
     def __init__(self):
         super(CreateAcc, self).__init__()
+        self.registerPage = Login()
         loadUi("register.ui", self)
         self.stdreg.clicked.connect(self.createaccstudent)
         self.adreg.clicked.connect(self.createaccadmin)
+        self.pushButton_cancel.clicked.connect(self.close)
+
+    def close(self):
+        login = Login()
+        widget.addWidget(login)
+        widget.setCurrentIndex(widget.currentIndex() + 1)
 
     def createaccstudent(self):
         username = self.username.text()
@@ -252,18 +256,16 @@ class CreateAcc(QDialog):
                 cur.execute('INSERT INTO login_info1 (username, password) VALUES (?,?)', user_info)
                 conn.commit()
                 conn.close()
-                self.registerPage = Login()
                 widget.addWidget(self.registerPage)
                 widget.setCurrentIndex(widget.currentIndex() + 1)
                 self.registerPage.show()
-
 
 
 app = QApplication(sys.argv)
 mainwindow = Login()
 widget = QtWidgets.QStackedWidget()
 widget.addWidget(mainwindow)
-widget.setFixedWidth(400)
-widget.setFixedHeight(500)
+widget.setFixedWidth(700)
+widget.setFixedHeight(600)
 widget.show()
 app.exec_()
