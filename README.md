@@ -1,0 +1,1 @@
+This project is simple GUI project made with PyQt and Sqlite3 for student database management system. You can registrate and log in as a student and add your tasks.You can also log in as Admin and add, list delete and modify student details
