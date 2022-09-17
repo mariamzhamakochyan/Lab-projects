@@ -58,7 +58,7 @@
     <string notr="true">background-color: rgb(38, 38, 38);</string>
    </property>
    <property name="placeholderText">
-    <string>  Task name</string>
+    <string>Task name</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="lineEdit_description">
@@ -74,7 +74,7 @@
     <string notr="true">background-color: rgb(38, 38, 38);</string>
    </property>
    <property name="placeholderText">
-    <string>  Description</string>
+    <string>Description</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="lineEdit_instruction">
@@ -90,7 +90,7 @@
     <string notr="true">background-color: rgb(38, 38, 38);</string>
    </property>
    <property name="placeholderText">
-    <string>  Instruction</string>
+    <string>Instruction</string>
    </property>
   </widget>
   <widget class="QTableWidget" name="tableWidget_all">

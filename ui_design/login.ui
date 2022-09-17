@@ -70,7 +70,7 @@
     <enum>QLineEdit::Normal</enum>
    </property>
    <property name="placeholderText">
-    <string>  Enter the username</string>
+    <string>Enter the username</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="password">
@@ -92,7 +92,7 @@
     <enum>QLineEdit::Password</enum>
    </property>
    <property name="placeholderText">
-    <string>  Enter the password</string>
+    <string>Enter the password</string>
    </property>
   </widget>
   <widget class="QLabel" name="label">
