@@ -98,6 +98,8 @@ class AdminAcc(QDialog):
             QMessageBox.about(self, "Warning", "id must be a number")
         elif name.isnumeric() or surname.isnumeric():
             QMessageBox.about(self, "Warning", "First and last names must be alphabetic")
+        elif len(id) == 0 or len(name) == 0 or len(surname) == 0 or len(email) == 0:
+            QMessageBox.about(self, "Warning", "Please fill in all inputs!")
         else:
             cur = conn.cursor()
             student_info = [id, name, surname, email]
@@ -243,16 +245,16 @@ class CreateAcc(QDialog):
             password = self.password.text()
             confirmpassword = self.confirmpassword.text()
             if len(username) == 0 or len(password) == 0 or len(confirmpassword) == 0:
-                QMessageBox.about(self, "Warning", "Please fill in all inputs.")
+                QMessageBox.about(self, "Warning", "Please fill in all inputs!")
             elif username.isnumeric():
                 QMessageBox.about(self, "Warning", "The username is unavailable, "
                                                    "please do not use numbers!")
             elif len(username) < 3:
-                QMessageBox.about(self, "Warning", "Username was too short.")
+                QMessageBox.about(self, "Warning", "Username was too short!")
             elif len(password) < 8:
-                QMessageBox.about(self, "Warning", "Minimum password length is 8")
+                QMessageBox.about(self, "Warning", "Minimum password length is 8!")
             elif password != confirmpassword:
-                QMessageBox.about(self, "Warning", "Passwords do not match")
+                QMessageBox.about(self, "Warning", "Passwords do not match!")
             else:
                 conn = sqlite3.connect("database/user_data.db")
                 cur = conn.cursor()
