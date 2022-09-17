@@ -100,6 +100,7 @@ class AdminAcc(QDialog):
             QMessageBox.about(self, "Warning", "First and last names must be alphabetic")
         elif len(id) == 0 or len(name) == 0 or len(surname) == 0 or len(email) == 0:
             QMessageBox.about(self, "Warning", "Please fill in all inputs!")
+
         else:
             cur = conn.cursor()
             student_info = [id, name, surname, email]
