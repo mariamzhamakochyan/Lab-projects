@@ -2,7 +2,8 @@
 
 import sys
 import sqlite3
-from PyQt5.QtWidgets import (QDialog, QApplication, QMessageBox, QTableWidget, QTableWidgetItem, QStackedWidget)
+from PyQt5.QtWidgets import (QDialog, QApplication, QMessageBox,
+                             QTableWidget, QTableWidgetItem, QStackedWidget)
 from PyQt5.uic import loadUi
 
 USER_NAME = ''
@@ -12,8 +13,8 @@ class Login(QDialog):
     """This class id for log in, it can  move you to register page or your account"""
     def __init__(self):
         super().__init__()
-        self.adminPage = AdminAcc()
-        self.studentPage = StudentAcc()
+        self.admin_page = AdminAcc()
+        self.student_page = StudentAcc()
         loadUi("ui_design/login.ui", self)
         self.pushButton_stdlogin.clicked.connect(self.loginfunc)
         self.pushButtton_register.clicked.connect(self.gotocreate)
@@ -27,9 +28,9 @@ class Login(QDialog):
             QMessageBox.about(self, "Warning", "Please Enter "
                                                "username and password")
         elif username == "coderepubliclab" and password == "code1111":
-            widget.addWidget(self.adminPage)
+            widget.addWidget(self.admin_page)
             widget.setCurrentIndex(widget.currentIndex() + 1)
-            self.adminPage.show()
+            self.admin_page.show()
 
         else:
             conn = sqlite3.connect("database/user_data.db")
@@ -38,12 +39,12 @@ class Login(QDialog):
                            'username =\'' + username + "\'")
             row = cursor.fetchall()
             if row:
-                widget.addWidget(self.studentPage)
+                widget.addWidget(self.student_page)
                 widget.setCurrentIndex(widget.currentIndex() + 1)
 
                 global USER_NAME
                 USER_NAME = username
-                self.studentPage.show()
+                self.student_page.show()
             else:
                 QMessageBox.about(self, "Warning", "Wrong username or password")
 
@@ -93,16 +94,17 @@ class AdminAcc(QDialog):
         surname = self.lineEdit_last.text()
         email = self.lineEdit_email.text()
         conn = sqlite3.connect("database/std_data.db")
-        cur = conn.cursor()
-        student_info = [id, name, surname, email]
-        cur.execute('INSERT INTO student_data (id, name, surname, email) '
-                    'VALUES (?,?,?,?)', student_info)
         if id.isalpha():
             QMessageBox.about(self, "Warning", "id must be a number")
         elif name.isnumeric() or surname.isnumeric():
             QMessageBox.about(self, "Warning", "First and last names must be alphabetic")
-        conn.commit()
-        conn.close()
+        else:
+            cur = conn.cursor()
+            student_info = [id, name, surname, email]
+            cur.execute('INSERT INTO student_data (id, name, surname, email) '
+                    'VALUES (?,?,?,?)', student_info)
+            conn.commit()
+            conn.close()
 
     def delfunc(self):
         """This function is for deleting students from data"""
@@ -166,7 +168,8 @@ class StudentAcc(QDialog):
 
         connection = sqlite3.connect("database/task_data.db")
         print(USER_NAME)
-        query = f"SELECT name, desription, instruction FROM task_data WHERE username = '{USER_NAME}'"
+        query = f"SELECT name, desription, instruction FROM " \
+                f"task_data WHERE username = '{USER_NAME}'"
         connection.execute(query)
         result = connection.execute(query)
         self.tableWidget_all.setRowCount(0)
@@ -202,7 +205,8 @@ class StudentAcc(QDialog):
 
         connection = sqlite3.connect("database/done_task.db")
         print(USER_NAME)
-        query = f"SELECT name, description, instruction FROM done_task WHERE username = '{USER_NAME}'"
+        query = f"SELECT name, description, instruction FROM " \
+                f"done_task WHERE username = '{USER_NAME}'"
         connection.execute(query)
         result = connection.execute(query)
         self.tableWidget_done.setRowCount(0)
@@ -219,7 +223,7 @@ class CreateAcc(QDialog):
     """This class to register"""
     def __init__(self):
         super().__init__()
-        self.registerPage = Login()
+        self.register_page = Login()
         loadUi("ui_design/register.ui", self)
         self.stdreg.clicked.connect(self.createaccstudent)
         self.pushButton_cancel.clicked.connect(self.close)
@@ -241,7 +245,8 @@ class CreateAcc(QDialog):
             if len(username) == 0 or len(password) == 0 or len(confirmpassword) == 0:
                 QMessageBox.about(self, "Warning", "Please fill in all inputs.")
             elif username.isnumeric():
-                QMessageBox.about(self, "Warning", "The username is unavailable, please do not use numbers!")
+                QMessageBox.about(self, "Warning", "The username is unavailable, "
+                                                   "please do not use numbers!")
             elif len(username) < 3:
                 QMessageBox.about(self, "Warning", "Username was too short.")
             elif len(password) < 8:
@@ -256,10 +261,10 @@ class CreateAcc(QDialog):
                             'VALUES (?,?)', user_info)
                 conn.commit()
                 conn.close()
-                self.registerPage = Login()
-                widget.addWidget(self.registerPage)
+                self.register_page = Login()
+                widget.addWidget(self.register_page)
                 widget.setCurrentIndex(widget.currentIndex() + 1)
-                self.registerPage.show()
+                self.register_page.show()
 
 
 app = QApplication(sys.argv)
