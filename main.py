@@ -6,10 +6,7 @@ from PyQt5.uic import loadUi
 
 
 
-def gotocreate():
-    createacc = CreateAcc()
-    widget.addWidget(createacc)
-    widget.setCurrentIndex(widget.currentIndex() + 1)
+
 
 
 class Login(QDialog):
@@ -20,7 +17,7 @@ class Login(QDialog):
         loadUi("ui_design/login.ui", self)
         self.pushButton_stdlogin.clicked.connect(self.studentfunc)
         self.pushButton_adminlogin.clicked.connect(self.adminfunc)
-        self.pushButtton_register.clicked.connect(gotocreate)
+        self.pushButtton_register.clicked.connect(self.gotocreate)
 
     def studentfunc(self):
         username = self.username.text()
@@ -60,6 +57,11 @@ class Login(QDialog):
                 self.adminPage.show()
             else:
                 QMessageBox.about(self, "Warning", "Wrong username or password")
+
+    def gotocreate(self):
+        createacc = CreateAcc()
+        widget.addWidget(createacc)
+        widget.setCurrentIndex(widget.currentIndex() + 1)
 
 
 class AdminAcc(QDialog):
