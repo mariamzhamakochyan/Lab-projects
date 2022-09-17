@@ -5,10 +5,11 @@ import sqlite3
 from PyQt5.QtWidgets import (QDialog, QApplication, QMessageBox, QTableWidget, QTableWidgetItem, QStackedWidget)
 from PyQt5.uic import loadUi
 
-User_name = ''
+USER_NAME = ''
 
 
 class Login(QDialog):
+    """This class id for log in, it can  move you to register page or your account"""
     def __init__(self):
         super().__init__()
         self.adminPage = AdminAcc()
@@ -40,8 +41,8 @@ class Login(QDialog):
                 widget.addWidget(self.studentPage)
                 widget.setCurrentIndex(widget.currentIndex() + 1)
 
-                global User_name
-                User_name = username
+                global USER_NAME
+                USER_NAME = username
                 self.studentPage.show()
             else:
                 QMessageBox.about(self, "Warning", "Wrong username or password")
@@ -55,6 +56,7 @@ class Login(QDialog):
 
 
 class AdminAcc(QDialog):
+    """This class is for creating students datas and work with them"""
     def __init__(self):
         super().__init__()
         loadUi("ui_design/admin.ui", self)
@@ -114,7 +116,7 @@ class AdminAcc(QDialog):
         conn.close()
 
     def modifyfunc(self):
-        """This function is deesigned to modify student data"""
+        """This function is designed to modify student data"""
 
         id = self.lineEdit_id.text()
         name = self.lineEdit_first.text()
@@ -131,6 +133,7 @@ class AdminAcc(QDialog):
 
 
 class StudentAcc(QDialog):
+    """This class is for students, it allows to add and list tasks"""
     def __init__(self):
         super().__init__()
         loadUi("ui_design/student.ui", self)
@@ -152,7 +155,7 @@ class StudentAcc(QDialog):
             QMessageBox.about(self, "Warning", "Please fill in all inputs before adding.")
         else:
             cur = conn.cursor()
-            task_info = [User_name, name, description, instruction]
+            task_info = [USER_NAME, name, description, instruction]
             cur.execute('INSERT INTO task_data (username, name, desription, instruction)'
                     ' VALUES (?,?,?,?)', task_info)
             conn.commit()
@@ -162,8 +165,8 @@ class StudentAcc(QDialog):
         """This function returns added tasks"""
 
         connection = sqlite3.connect("database/task_data.db")
-        print(User_name)
-        query = f"SELECT name, desription, instruction FROM task_data WHERE username = '{User_name}'"
+        print(USER_NAME)
+        query = f"SELECT name, desription, instruction FROM task_data WHERE username = '{USER_NAME}'"
         connection.execute(query)
         result = connection.execute(query)
         self.tableWidget_all.setRowCount(0)
@@ -188,7 +191,7 @@ class StudentAcc(QDialog):
             QMessageBox.about(self, "Warning", "Please fill in all inputs before adding.")
         else:
             cur = conn.cursor()
-            task_info = [User_name, name, description, instruction]
+            task_info = [USER_NAME, name, description, instruction]
             cur.execute('INSERT INTO done_task (username, name, description, instruction)'
                     ' VALUES (?,?,?,?)', task_info)
             conn.commit()
@@ -198,8 +201,8 @@ class StudentAcc(QDialog):
         """This function returns done tasks"""
 
         connection = sqlite3.connect("database/done_task.db")
-        print(User_name)
-        query = f"SELECT name, description, instruction FROM done_task WHERE username = '{User_name}'"
+        print(USER_NAME)
+        query = f"SELECT name, description, instruction FROM done_task WHERE username = '{USER_NAME}'"
         connection.execute(query)
         result = connection.execute(query)
         self.tableWidget_done.setRowCount(0)
@@ -213,6 +216,7 @@ class StudentAcc(QDialog):
 
 
 class CreateAcc(QDialog):
+    """This class to register"""
     def __init__(self):
         super().__init__()
         self.registerPage = Login()
@@ -245,7 +249,7 @@ class CreateAcc(QDialog):
             elif password != confirmpassword:
                 QMessageBox.about(self, "Warning", "Passwords do not match")
             else:
-                conn = sqlite3.connect("database/shop_data.db")
+                conn = sqlite3.connect("database/user_data.db")
                 cur = conn.cursor()
                 user_info = [username, password]
                 cur.execute('INSERT INTO login_info (username, password) '
