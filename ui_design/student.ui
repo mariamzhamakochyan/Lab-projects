@@ -32,7 +32,7 @@
   <widget class="QPushButton" name="pushButton_add">
    <property name="geometry">
     <rect>
-     <x>380</x>
+     <x>400</x>
      <y>290</y>
      <width>101</width>
      <height>31</height>
@@ -49,7 +49,7 @@
    <property name="geometry">
     <rect>
      <x>380</x>
-     <y>120</y>
+     <y>140</y>
      <width>311</width>
      <height>41</height>
     </rect>
@@ -65,7 +65,7 @@
    <property name="geometry">
     <rect>
      <x>380</x>
-     <y>180</y>
+     <y>190</y>
      <width>311</width>
      <height>41</height>
     </rect>
@@ -139,7 +139,7 @@
   <widget class="QPushButton" name="pushButton_done">
    <property name="geometry">
     <rect>
-     <x>510</x>
+     <x>570</x>
      <y>290</y>
      <width>101</width>
      <height>31</height>
@@ -260,6 +260,25 @@
    </property>
    <property name="text">
     <string>TASKS</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit_userID">
+   <property name="geometry">
+    <rect>
+     <x>380</x>
+     <y>90</y>
+     <width>311</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(38, 38, 38);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="placeholderText">
+    <string>username ID</string>
    </property>
   </widget>
  </widget>

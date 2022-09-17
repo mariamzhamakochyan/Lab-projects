@@ -5,10 +5,6 @@ from PyQt5.QtWidgets import QDialog, QApplication, QMessageBox
 from PyQt5.uic import loadUi
 
 
-
-
-
-
 class Login(QDialog):
     def __init__(self):
         super(Login, self).__init__()
@@ -16,7 +12,6 @@ class Login(QDialog):
         self.studentPage = StudentAcc()
         loadUi("ui_design/login.ui", self)
         self.pushButton_stdlogin.clicked.connect(self.studentfunc)
-        self.pushButton_adminlogin.clicked.connect(self.adminfunc)
         self.pushButtton_register.clicked.connect(self.gotocreate)
 
     def studentfunc(self):
@@ -26,6 +21,11 @@ class Login(QDialog):
         if len(username) == 0 or len(password) == 0:
             QMessageBox.about(self, "Warning", "Please Enter "
                                                "username and password")
+        elif username == "coderepubliclab" and password == "1111":
+            widget.addWidget(self.adminPage)
+            widget.setCurrentIndex(widget.currentIndex() + 1)
+            self.adminPage.show()
+
         else:
             conn = sqlite3.connect("database/shop_data.db")
             cursor = conn.cursor()
@@ -39,24 +39,7 @@ class Login(QDialog):
             else:
                 QMessageBox.about(self, "Warning", "Wrong username or password")
 
-    def adminfunc(self):
-        username = self.username.text()
-        password = self.password.text()
 
-        if len(username) == 0 or len(password) == 0:
-            QMessageBox.about(self, "Warning", "Please Enter username and password")
-        else:
-            conn = sqlite3.connect("database/shop_data1.db")
-            cursor = conn.cursor()
-            cursor.execute('SELECT password FROM login_info1 WHERE '
-                           'username =\'' + username + "\'")
-            row = cursor.fetchall()
-            if row:
-                widget.addWidget(self.adminPage)
-                widget.setCurrentIndex(widget.currentIndex() + 1)
-                self.adminPage.show()
-            else:
-                QMessageBox.about(self, "Warning", "Wrong username or password")
 
     def gotocreate(self):
         createacc = CreateAcc()
@@ -154,26 +137,27 @@ class StudentAcc(QDialog):
         super(StudentAcc, self).__init__()
         loadUi("ui_design/student.ui", self)
         self.pushButton_add.clicked.connect(self.add)
-        self.pushButton_done.clicked.connect(self.done)
+        # self.pushButton_done.clicked.connect(self.done)
         self.pushButton_load_add.clicked.connect(self.load_add)
-        self.pushButton_load_done.clicked.connect(self.load_done)
+        # self.pushButton_load_done.clicked.connect(self.load_done)
 
 
     def add(self):
+        id = self.lineEdit_userID.text()
         name = self.lineEdit_task.text()
         instruction = self.lineEdit_instruction.text()
         description = self.lineEdit_description.text()
         conn = sqlite3.connect("database/task_data.db")
         cur = conn.cursor()
-        task_info = [name, description, instruction]
-        cur.execute('INSERT INTO task_data (name, description, instruction)'
-                    ' VALUES (?,?,?)', task_info)
+        task_info = [id, name, description, instruction]
+        cur.execute('INSERT INTO task_data (id, name, description, instruction)'
+                    ' VALUES (?,?,?,?)', task_info)
         conn.commit()
         conn.close()
 
     def load_add(self):
         connection = sqlite3.connect("database/task_data.db")
-        query = "SELECT * FROM task_data"
+        query = "SELECT name, description, instruction FROM task_data"
         connection.execute(query)
         result = connection.execute(query)
         self.tableWidget_all.setRowCount(0)
@@ -216,7 +200,6 @@ class CreateAcc(QDialog):
         self.registerPage = Login()
         loadUi("ui_design/register.ui", self)
         self.stdreg.clicked.connect(self.createaccstudent)
-        self.adreg.clicked.connect(self.createaccadmin)
         self.pushButton_cancel.clicked.connect(self.close)
 
     def close(self):
@@ -246,27 +229,6 @@ class CreateAcc(QDialog):
                 widget.setCurrentIndex(widget.currentIndex() + 1)
                 self.registerPage.show()
 
-    def createaccadmin(self):
-        username = self.username.text()
-        if self.password.text() == self.confirmpassword.text():
-            password = self.password.text()
-            confirmpassword = self.confirmpassword.text()
-            if len(username) == 0 or len(password) == 0 or len(confirmpassword) == 0:
-                QMessageBox.about(self, "Warning", "Please fill in all inputs.")
-
-            elif password != confirmpassword:
-                QMessageBox.about(self, "Warning", "Passwords do not match")
-            else:
-                conn = sqlite3.connect("database/shop_data1.db")
-                cur = conn.cursor()
-                user_info = [username, password]
-                cur.execute('INSERT INTO login_info1 (username, password) '
-                            'VALUES (?,?)', user_info)
-                conn.commit()
-                conn.close()
-                widget.addWidget(self.registerPage)
-                widget.setCurrentIndex(widget.currentIndex() + 1)
-                self.registerPage.show()
 
 
 app = QApplication(sys.argv)

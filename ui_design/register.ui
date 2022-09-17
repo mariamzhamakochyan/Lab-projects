@@ -19,9 +19,9 @@
   <widget class="QPushButton" name="stdreg">
    <property name="geometry">
     <rect>
-     <x>170</x>
+     <x>200</x>
      <y>380</y>
-     <width>171</width>
+     <width>301</width>
      <height>31</height>
     </rect>
    </property>
@@ -29,23 +29,7 @@
     <string notr="true">background-color: rgb(61, 41, 128);</string>
    </property>
    <property name="text">
-    <string>Registrate as student</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="adreg">
-   <property name="geometry">
-    <rect>
-     <x>360</x>
-     <y>380</y>
-     <width>171</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(61, 41, 128);</string>
-   </property>
-   <property name="text">
-    <string>Registrate as admin</string>
+    <string>REGISTRATE</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="username">
@@ -115,7 +99,7 @@
    <property name="geometry">
     <rect>
      <x>260</x>
-     <y>440</y>
+     <y>450</y>
      <width>181</width>
      <height>31</height>
     </rect>
