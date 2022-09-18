@@ -35,8 +35,8 @@ class Login(QDialog):
         else:
             conn = sqlite3.connect("database/user_data.db")
             cursor = conn.cursor()
-            cursor.execute('SELECT password FROM login_info WHERE '
-                           'username =\'' + username + "\'")
+            sql = "SELECT * from login_info WHERE username = ? and password = ?"
+            cursor.execute(sql, [username, password])
             row = cursor.fetchall()
             if row:
                 widget.addWidget(self.student_page)
